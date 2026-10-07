@@ -1,44 +1,59 @@
 # 🍫 Sales Data Analysis & Power BI Dashboard
 
-An end-to-end **Data Analyst portfolio project** using **MySQL 8.0 + SQL + Power BI** to analyze chocolate sales data and build an interactive business dashboard.
+An end-to-end **Data Analyst portfolio project** using **MySQL 8.0, SQL, Excel/CSV, and Power BI** to analyze chocolate sales data and build an interactive business dashboard.
 
-**Workflow:** Excel/CSV → MySQL → SQL Cleaning & Analysis → Power BI → Interactive Dashboard
+### 🔄 Project Workflow
+
+**Excel/CSV → MySQL → SQL Data Cleaning & Analysis → Power BI → Interactive Dashboard**
+
+---
 
 ## 🛠️ Tools Used
 
-- MySQL 8.0
-- SQL
-- Power BI Desktop
-- Microsoft Excel / CSV
-- Git & GitHub
+- **MySQL 8.0**
+- **SQL**
+- **Power BI Desktop**
+- **Microsoft Excel**
+- **CSV**
+- **Git & GitHub**
+
+---
 
 ## 🧠 Skills Demonstrated
 
 ### SQL
+
 - Data loading and cleaning
-- Date and currency transformation
-- `GROUP BY` and aggregate functions
+- Data validation
+- Date transformation
+- Currency and numeric transformation
+- Aggregate functions
+- `GROUP BY`
+- `ORDER BY`
 - Window functions
 - Month-over-Month analysis
-- Analytical SQL views
-- Data quality validation
+- Sales efficiency analysis
+- SQL Views
 
 ### Power BI
+
 - MySQL data connection
-- KPI cards
-- Line charts
-- Horizontal bar charts
-- Donut charts
-- Top-N filtering
+- KPI Cards
+- Line/Area Charts
+- Horizontal Bar Charts
+- Donut Charts
+- Top-N analysis
 - Interactive slicers
-- Month sorting
-- Cross-filtering and dashboard formatting
+- Cross-filtering
+- Dashboard formatting
+- Data visualization
 
 ### Data Analysis
-- Sales trend analysis
-- Country performance
-- Product performance
-- Salesperson performance
+
+- Monthly sales trend analysis
+- Country performance analysis
+- Product performance analysis
+- Salesperson performance analysis
 - Sales-per-box efficiency
 - Business insights
 
@@ -46,7 +61,7 @@ An end-to-end **Data Analyst portfolio project** using **MySQL 8.0 + SQL + Power
 
 # 📊 Dataset
 
-The dataset contains **1,094 sales records** covering **January 2022 to August 2022**.
+The dataset contains **1,094 sales transactions** covering **January 2022 to August 2022**.
 
 | Metric | Value |
 |---|---:|
@@ -56,8 +71,9 @@ The dataset contains **1,094 sales records** covering **January 2022 to August 2
 | Products | 22 |
 | Countries | 6 |
 | Salespeople | 25 |
+| Period | Jan–Aug 2022 |
 
-Main columns:
+### Dataset Columns
 
 | Column | Description |
 |---|---|
@@ -72,15 +88,17 @@ Main columns:
 
 # 🧹 Data Cleaning
 
-The raw data required transformation before analysis.
+The raw dataset was prepared before analysis.
 
-Key steps:
+### Key Cleaning Steps
 
-- Converted text dates such as `4-Jan-22` into MySQL `DATE`.
+- Converted text dates into MySQL `DATE` format.
 - Removed `$`, commas, and spaces from sales amounts.
 - Converted sales amounts to `DECIMAL(12,2)`.
-- Converted `Boxes_Shipped` to integer values.
-- Checked row counts and NULL values.
+- Converted `Boxes_Shipped` into integer values.
+- Checked record counts.
+- Checked NULL values.
+- Validated the date range.
 - Created an analytical SQL view for Power BI.
 
 ### Analytical View
@@ -97,7 +115,10 @@ SELECT
     MONTHNAME(Date) AS Month,
     Amount AS Sales,
     Boxes_Shipped,
-    ROUND(Amount / NULLIF(Boxes_Shipped, 0), 2) AS Sales_Per_Box
+    ROUND(
+        Amount / NULLIF(Boxes_Shipped, 0),
+        2
+    ) AS Sales_Per_Box
 FROM chandoo_sales_data;
 ```
 
@@ -105,11 +126,13 @@ FROM chandoo_sales_data;
 
 # 💰 Key KPIs
 
-- **Total Sales:** $6.18M
-- **Total Boxes:** 177K
-- **Total Products:** 22
-- **Total Countries:** 6
-- **Total Salespeople:** 25
+| KPI | Value |
+|---|---:|
+| Total Sales | $6.18M |
+| Total Boxes | 177K |
+| Total Products | 22 |
+| Total Countries | 6 |
+| Total Salespeople | 25 |
 
 ---
 
@@ -126,7 +149,11 @@ FROM chandoo_sales_data;
 | July | $803,425 | -7.13% |
 | August | $743,148 | -7.50% |
 
-**Insight:** January had the highest monthly sales at approximately $896K. June also performed strongly at approximately $865K. February recorded the largest monthly decline.
+### Insight
+
+January recorded the highest monthly sales at approximately **$896K**.
+
+June also performed strongly with approximately **$865K** in sales and recorded the highest positive month-over-month growth of **14.91%**.
 
 ---
 
@@ -141,7 +168,9 @@ FROM chandoo_sales_data;
 | 5 | Canada | $962,899 |
 | 6 | New Zealand | $950,418 |
 
-**Insight:** Australia was the highest-performing country, while New Zealand had the lowest total sales among the six markets.
+### Insight
+
+**Australia** generated the highest sales among the six countries, with approximately **$1.14M**.
 
 ---
 
@@ -160,32 +189,34 @@ FROM chandoo_sales_data;
 | 9 | Spicy Special Slims | $293,454 |
 | 10 | Mint Chip Choco | $283,969 |
 
-**Insight:** Smooth Sliky Salty was the highest-selling product by revenue.
+### Insight
+
+**Smooth Sliky Salty** was the highest-selling product, generating approximately **$349.7K**.
 
 ---
 
 # 📦 Sales-per-Box Analysis
 
-Formula:
+### Formula
 
 ```text
-Sales per Box = Sales Amount / Boxes Shipped
+Sales per Box = Total Sales / Total Boxes Shipped
 ```
 
-Key findings:
+### Key Findings
 
-- **Almond Choco:** highest sales per box at approximately **$41.20**
-- **White Choc:** approximately **$39.95**
-- **70% Dark Bites:** lowest at approximately **$26.40**
-- **Rafaelita Blaksland:** highest salesperson sales-per-box efficiency at approximately **$48.93**
+- **Almond Choco** had the highest sales per box at approximately **$41.20**.
+- **White Choc** generated approximately **$39.95 per box**.
+- **70% Dark Bites** had the lowest sales per box at approximately **$26.40**.
+- **Rafaelita Blaksland** achieved the highest salesperson sales-per-box efficiency at approximately **$48.93**.
 
-This separates **sales volume** from **sales efficiency**.
+This analysis helps distinguish **sales volume from sales efficiency**.
 
 ---
 
 # 👥 Salesperson Analysis
 
-### Top 10 Salespeople by Sales
+## Top 10 Salespeople by Sales
 
 | Rank | Salesperson | Sales |
 |---:|---|---:|
@@ -200,57 +231,54 @@ This separates **sales volume** from **sales efficiency**.
 | 9 | Kaine Padly | $266,490 |
 | 10 | Marney O'Breen | $259,742 |
 
-Additional findings:
+### Additional Findings
 
-- **Karlen McCaffrey** shipped the most boxes: **9,658**
-- **Madelene Upcott** had the highest average sales per transaction: approximately **$7,024.42**
+- **Ches Bonnell** generated the highest total sales at approximately **$320.9K**.
+- **Karlen McCaffrey** shipped the most boxes with **9,658 boxes**.
+- **Madelene Upcott** had the highest average sales per transaction at approximately **$7,024.42**.
+- **Rafaelita Blaksland** had the highest sales-per-box efficiency.
 
 ---
 
 # 📊 Power BI Dashboard
 
-The final dashboard contains:
+The final dashboard was created in **Power BI Desktop** using the MySQL analytical view.
 
-### KPI Cards
+## KPI Cards
+
 - 📊 Total Sales
 - 📦 Total Boxes
 - ◇ Total Products
 - 🌐 Total Countries
 - 👥 Total Salespeople
 
-### Visualizations
+## Visualizations
+
 - 📈 Monthly Sales Trend
 - 🌐 Sales by Country
 - 📦 Top 10 Products by Sales
 - 👥 Top 10 Salespeople by Sales
 - 🍩 Top 5 Products — Sales Mix
 
-### Interactive Filters
+## Interactive Filters
+
 - Year
 - Month
 - Country
 
-All slicers dynamically filter the dashboard visuals.
+The slicers dynamically filter the dashboard visuals.
 
-## 🖼️ Dashboard Screenshot
+---
 
-Place the final screenshot at:
+# 🖼️ Dashboard Preview
 
-```text
-Screenshots/dashboard.png
-```
-
-Then add:
-
-```markdown
 ![Sales Performance Dashboard](Screenshots/dashboard.png)
-```
 
 ---
 
 # ❓ Business Questions Answered
 
-1. What is the total sales generated during the analysis period?
+1. What is the total sales generated?
 2. How do sales change month over month?
 3. Which month generated the highest sales?
 4. Which countries generate the highest sales?
@@ -267,66 +295,76 @@ Then add:
 
 # 🔎 Key SQL Queries
 
-### Total Sales
+## Total Sales
 
 ```sql
-SELECT SUM(Amount) AS Total_Sales
+SELECT
+    ROUND(SUM(Amount), 2) AS Total_Sales
 FROM chandoo_sales_data;
 ```
 
-### Sales by Country
+## Sales by Country
 
 ```sql
 SELECT
     Country,
-    SUM(Amount) AS Total_Sales
+    ROUND(SUM(Amount), 2) AS Total_Sales
 FROM chandoo_sales_data
 GROUP BY Country
 ORDER BY Total_Sales DESC;
 ```
 
-### Monthly Sales
+## Monthly Sales
 
 ```sql
 SELECT
+    YEAR(Date) AS Year,
     MONTH(Date) AS Month_Number,
     MONTHNAME(Date) AS Month,
-    SUM(Amount) AS Total_Sales
+    ROUND(SUM(Amount), 2) AS Total_Sales
 FROM chandoo_sales_data
-GROUP BY MONTH(Date), MONTHNAME(Date)
-ORDER BY Month_Number;
+GROUP BY
+    YEAR(Date),
+    MONTH(Date),
+    MONTHNAME(Date)
+ORDER BY
+    Year,
+    Month_Number;
 ```
 
-### Top 10 Products
+## Top 10 Products
 
 ```sql
 SELECT
     Product,
-    SUM(Amount) AS Total_Sales
+    ROUND(SUM(Amount), 2) AS Total_Sales
 FROM chandoo_sales_data
 GROUP BY Product
 ORDER BY Total_Sales DESC
 LIMIT 10;
 ```
 
-### Top 10 Salespeople
+## Top 10 Salespeople
 
 ```sql
 SELECT
     Sales_Person,
-    SUM(Amount) AS Total_Sales
+    ROUND(SUM(Amount), 2) AS Total_Sales
 FROM chandoo_sales_data
 GROUP BY Sales_Person
 ORDER BY Total_Sales DESC
 LIMIT 10;
 ```
 
-### Sales per Box
+## Sales per Box
 
 ```sql
 SELECT
     Product,
-    ROUND(SUM(Amount) / NULLIF(SUM(Boxes_Shipped), 0), 2) AS Sales_Per_Box
+    ROUND(
+        SUM(Amount) / NULLIF(SUM(Boxes_Shipped), 0),
+        2
+    ) AS Sales_Per_Box
 FROM chandoo_sales_data
 GROUP BY Product
 ORDER BY Sales_Per_Box DESC;
@@ -336,19 +374,24 @@ ORDER BY Sales_Per_Box DESC;
 
 # 💡 Business Insights
 
-### 1. Strong overall sales
-The business generated approximately **$6.18M** during the eight-month period.
+### 1. Strong Overall Performance
 
-### 2. Monthly fluctuations
-Sales varied significantly across months, with the largest decline occurring in February and a strong recovery in June.
+The business generated approximately **$6.18M** in sales during the eight-month period.
 
-### 3. Australia leads the markets
-Australia generated approximately **$1.14M**, the highest country-level sales.
+### 2. Monthly Fluctuations
 
-### 4. Product concentration
-The top products contribute a significant share of sales, with Smooth Sliky Salty ranking first.
+Sales varied throughout the period, with February showing the largest decline and June showing strong recovery.
 
-### 5. Volume is not the same as efficiency
+### 3. Australia Leads the Markets
+
+Australia generated approximately **$1.14M**, making it the highest-performing country.
+
+### 4. Product Performance
+
+**Smooth Sliky Salty** was the highest-selling product by revenue.
+
+### 5. Volume vs Efficiency
+
 The salesperson shipping the most boxes is not necessarily the salesperson with the highest sales-per-box efficiency.
 
 ---
@@ -361,12 +404,11 @@ Sales-Data-SQL-PowerBI/
 ├── README.md
 │
 ├── Data/
+│   ├── sample-data-10mins.xlsx
 │   └── chandoo_sales_data.csv
 │
 ├── SQL/
-│   ├── data_quality.sql
-│   ├── sales_analysis.sql
-│   └── sales_analysis_view.sql
+│   └── sales_analysis.sql
 │
 ├── PowerBI/
 │   └── Sales_Performance_Dashboard.pbix
@@ -379,14 +421,22 @@ Sales-Data-SQL-PowerBI/
 
 # 🚀 How to Reproduce
 
-### 1. Create the database
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/ankita-singhhh/Sales-Data-SQL-PowerBI.git
+cd Sales-Data-SQL-PowerBI
+```
+
+### 2. Create the Database
 
 ```sql
 CREATE DATABASE sales_analysis;
+
 USE sales_analysis;
 ```
 
-### 2. Create the table
+### 3. Create the Table
 
 ```sql
 CREATE TABLE chandoo_sales_data (
@@ -399,28 +449,61 @@ CREATE TABLE chandoo_sales_data (
 );
 ```
 
-### 3. Load and clean the data
+### 4. Load the Dataset
 
-Run the SQL scripts in the `SQL` folder.
+Use the CSV file from the `Data` folder to load the data into MySQL.
 
-### 4. Create the analytical view
+### 5. Run SQL Analysis
 
-Use the `sales_analysis_view` query shown above.
+Open:
 
-### 5. Connect Power BI
+```text
+SQL/sales_analysis.sql
+```
 
-Connect Power BI Desktop to:
+Run the required SQL queries for data validation, analysis, and the Power BI analytical view.
+
+### 6. Connect Power BI
+
+Open:
+
+```text
+PowerBI/Sales_Performance_Dashboard.pbix
+```
+
+Connect Power BI to:
 
 ```text
 Server: localhost:3306
 Database: sales_analysis
 ```
 
-Use `sales_analysis_view` as the main Power BI data source.
+Use:
 
-### 6. Build the dashboard
+```text
+sales_analysis_view
+```
 
-Create the KPI cards, charts, slicers, and formatting shown in the project.
+as the main analytical data source.
+
+---
+
+# 🔗 Project Links
+
+- **GitHub Repository:**  
+  https://github.com/ankita-singhhh/Sales-Data-SQL-PowerBI
+
+- **SQL Analysis:**  
+  [SQL Folder](SQL/)
+
+- **Power BI Dashboard:**  
+  [PowerBI Folder](PowerBI/)
+
+- **Dataset:**  
+  [Data Folder](Data/)
+
+- **Dashboard Screenshot:**  
+  [Screenshots Folder](Screenshots/)
 
 ---
 
@@ -430,7 +513,35 @@ This project demonstrates an end-to-end **Data Analyst workflow**:
 
 **Raw Data → Data Cleaning → SQL Analysis → Power BI Visualization → Interactive Dashboard → Business Insights**
 
-It demonstrates practical skills in **SQL, data cleaning, exploratory analysis, KPI development, dashboard design, and business-oriented reporting**.
+The project demonstrates practical skills in:
+
+- SQL
+- MySQL
+- Data Cleaning
+- Exploratory Data Analysis
+- KPI Development
+- Power BI
+- Data Visualization
+- Business Intelligence
+- Business-oriented Reporting
 
 ---
 
+# 👩‍💻 Author
+
+**Ankita Singh**
+
+B.Tech — Computer Science & Engineering (Data Science)
+
+### Areas of Interest
+
+- Data Analytics
+- SQL
+- Power BI
+- Python
+- Machine Learning
+- Generative AI
+
+---
+
+⭐ **If you found this project useful, feel free to explore the repository and connect with me on GitHub.**
